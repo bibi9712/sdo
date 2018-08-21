@@ -1,0 +1,7 @@
+{
+  "name": "sdo",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
