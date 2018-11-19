@@ -8,8 +8,10 @@ import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { TabsPage} from '../pages/tabs/tabs';
 import {PopoverPage} from '../pages/header/PopoverPage';
+import {HeaderPage} from '../pages/header/header';
 import{AngularFireModule} from 'angularfire2';
 import{AngularFireDatabaseModule} from'angularfire2/database';
+
 
 var config = {
   apiKey: "AIzaSyCL_H94pwAziUn0ecS4mzXqXLDHIHi9j5k",
@@ -24,7 +26,8 @@ var config = {
   declarations: [
     MyApp,
     TabsPage,
-    PopoverPage
+    PopoverPage,
+    HeaderPage
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ var config = {
   entryComponents: [
     MyApp,
     TabsPage,
-    PopoverPage
+    PopoverPage,
+    HeaderPage
   ],
   providers: [
     StatusBar,

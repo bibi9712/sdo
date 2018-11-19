@@ -1,3 +1,8 @@
 page-connexion {
+    .segment-md-light .segment-button.activated, .segment-md-light .segment-button.segment-activated {
+        border-color: #51d82f;
+        color: #000;
+        opacity: 1;
+    }
 
 }

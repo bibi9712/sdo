@@ -49,7 +49,7 @@ export class ConnexionPage {
     let liste =  this.connexionService.getUses();
     liste.subscribe(
       data =>   {
-          let userfind = data.find(ose=> ose.password == this.user.password )
+          let userfind = data.find(ose=> ose.password == this.user.password &&  ose.pseudo ==this.user.pseudo)
           if (userfind != null) {
             this.storage.set('user', userfind);
             this.navCtrl.push(TabsPage);
@@ -62,23 +62,55 @@ export class ConnexionPage {
   }
 
   doSignUp() {
+
     if (this.user.pseudo == '' || this.user.password == '') {
       this.getErrorDoLogin();
     } else {
-      this.connexionService.addUser(this.user);
-      this.storage.set('user', this.user);
-      this.navCtrl.push(TabsPage);
+      let liste =  this.connexionService.getUses();
+      liste.subscribe(
+        data =>   {
+             let userFind = data.find(ose=> ose.password == this.user.password && ose.pseudo ==this.user.pseudo) 
+             if (userFind != null) {
+              this.getErrorSignUp();
+            }
+            else {
+              this.connexionService.addUser(this.user);
+              this.storage.set('user', this.user);
+              this.navCtrl.push(TabsPage);
+              this.getuserCreated();
+            }
+        }
+       );
     }
-
   }
 
   getErrorDoLogin() {
     let toast = this.toastctrl.create({
-      message: 'Log or Password wrong',
+      message: 'Login or Password is wrong',
       duration: 3000,
       position: 'top'
     }
 
+    );
+    toast.present();
+  }
+
+  getErrorSignUp() {
+    let toast = this.toastctrl.create({
+      message: 'Login or Password already existing',
+      duration: 3000,
+      position: 'top'
+    }
+    );
+    toast.present();
+  }
+
+  getuserCreated() {
+    let toast = this.toastctrl.create({
+      message: 'User is created',
+      duration: 3000,
+      position: 'top'
+    }
     );
     toast.present();
   }

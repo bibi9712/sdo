@@ -1,21 +1,17 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { FavorisPage } from './favoris';
-import {HeaderPage} from '../header/header';
-
-
+import {HeaderPageModule} from '../header/header.module';
 
 @NgModule({
   declarations: [
     FavorisPage,
-    HeaderPage
   ],
   imports: [
-    IonicPageModule.forChild(FavorisPage),
+    IonicPageModule.forChild(FavorisPage),HeaderPageModule
   ],
   entryComponents :[
     FavorisPage,
-    HeaderPage
   ]
 })
 export class FavorisPageModule {}

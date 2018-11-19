@@ -5,7 +5,7 @@
   </div>
 
   <div padding>
-    <ion-segment [(ngModel)]="opt" color="light">
+    <ion-segment [(ngModel)]="opt">
       <ion-segment-button value="signin">
         Sign In
       </ion-segment-button>
@@ -24,11 +24,9 @@
 
         <div padding text-center>
           <button ion-button round color="light" icon-right >
-            {{ 'SIGNIN'}} <ion-icon name="log-in"></ion-icon>
+            {{ 'Connexion'}} <ion-icon name="log-in"></ion-icon>
           </button>
         </div>
-
-
     </form>
 
     <form (submit)="doSignUp()" *ngSwitchCase="'signup'">
@@ -40,11 +38,9 @@
 
         <div padding text-center>
           <button ion-button round color="light" icon-right>
-            {{ 'SIGNUP' }} <ion-icon name="person-add"></ion-icon>
+            {{ 'Create' }} <ion-icon name="person-add"></ion-icon>
           </button>
         </div>
-
-
     </form>
 
   </div>
