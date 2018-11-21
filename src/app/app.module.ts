@@ -4,15 +4,27 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
+import{AngularFireDatabaseModule} from'angularfire2/database';
+import{AngularFireModule} from 'angularfire2';
 
 import { MyApp } from './app.component';
-import { TabsPage} from '../pages/tabs/tabs';
-import {PopoverPage} from '../pages/header/PopoverPage';
+
+/************ PAGES ***************/
+import {ConnexionPage} from '../pages/connexion/connexion';
 import {HeaderPage} from '../pages/header/header';
-import{AngularFireModule} from 'angularfire2';
-import{AngularFireDatabaseModule} from'angularfire2/database';
+import {PopoverPage} from '../pages/header/PopoverPage';
+import { TabsPage} from '../pages/tabs/tabs';
+import {DrinksPage} from '../pages/drinks/drinks';
+import {DrinkPage} from '../pages/drinks/drink/drink';
+import {FavorisPage} from '../pages/favoris/favoris';
+import {GroupsPage} from '../pages/groups/groups';
+import {GroupPage} from '../pages/groups/group/group';
+//import {} from '../pages/';
 
+/************ SERVICES ***************/
+import {ConnexionService} from '../pages/connexion/connexion.service';
 
+/************ BDD ***************/
 var config = {
   apiKey: "AIzaSyCL_H94pwAziUn0ecS4mzXqXLDHIHi9j5k",
   authDomain: "sdo0-4b11a.firebaseapp.com",
@@ -27,7 +39,13 @@ var config = {
     MyApp,
     TabsPage,
     PopoverPage,
-    HeaderPage
+    HeaderPage,
+    ConnexionPage,
+    DrinksPage,
+    DrinkPage,
+    FavorisPage,
+    GroupsPage,
+    GroupPage
   ],
   imports: [
     BrowserModule,
@@ -42,11 +60,18 @@ var config = {
     MyApp,
     TabsPage,
     PopoverPage,
-    HeaderPage
+    HeaderPage,
+    ConnexionPage,
+    DrinksPage,
+    DrinkPage,
+    FavorisPage,
+    GroupsPage,
+    GroupPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    ConnexionService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

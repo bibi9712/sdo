@@ -1,30 +1,26 @@
 <header></header>
-<ion-grid class="backGro">
-  <ion-row>
-    <ion-col class="col-md-6">
-      <ion-card>
-        <img src="../../assets/imgs/alcool.jpg"/>
-        <div class="card-title">Cocktail de feu</div>
-        <div class="card-subtitle">viens...:)</div>
-      </ion-card>
-    </ion-col>
-    <ion-col class="col-md-6">
-      <ion-card (tap)="tapEvent('vefev')">
-        vefev
-      </ion-card>
-    </ion-col>
-  </ion-row>
- 
- <ion-row>
-  <ion-col class="col-md-6">
- <ion-card>
-    SASO
-  </ion-card>
-     </ion-col>
-     <ion-col class="col-md-6">
-  <ion-card>
-vefev
-  </ion-card>
-    </ion-col>
-    </ion-row>
-</ion-grid>
+<ion-content padding>
+  <div class="main-content">
+    <h1>Are you staying in or going out?</h1>
+    <div class="illustration">
+        <div id="in" class="person-type active home-body">
+      <img src="http://olivia-ng.com/codepen/boy.svg" width="45px"/> 
+      <img src="indoor.svg" height="250"/>
+      <img src="http://olivia-ng.com/codepen/furniture.svg" width="270"/>
+      <img src="vino.svg" width="32px"/>
+      </div>
+
+      <div id="out" class="person-type outdoor-person">
+          <img src="http://olivia-ng.com/codepen/boy.svg" width="45px"/> 
+          <div class="scenery"><img src="http://olivia-ng.com/codepen/outdoor.svg" height="250"/></div>
+          <div class="background-items"><img src="http://olivia-ng.com/codepen/sky.svg" width="220"/></div>
+          <div class="foreground-items"><img src="http://olivia-ng.com/codepen/dogtree.svg" width="200"/></div>
+        </div>
+
+    </div>
+    <div class="option-wrapper">
+      <button  id = "sinAlcool" class="option active" (click)="changeClass('sinAlcool')">I'm attached to my home.</button>
+      <button id = "alcool" class="option" (click)="changeClass('alcool')">Hell yeah, I love the outdoors!</button>
+    </div>
+  </div>
+</ion-content>

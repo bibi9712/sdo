@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import { ViewController, NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import {ConnexionPage} from '../connexion/connexion';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class PopoverPage {
     }
 
     doLogOut(){
-      this.navCtrl.push('ConnexionPage');
+      this.navCtrl.push(ConnexionPage);
     }
     
 }

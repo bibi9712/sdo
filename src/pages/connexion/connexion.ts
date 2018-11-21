@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import {  NavController, NavParams, ToastController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 import { EntiteUser } from '../profil/EntiteUser';
 import { Storage } from '@ionic/storage';
@@ -7,7 +7,6 @@ import { ConnexionService } from './connexion.service'
 import { AngularFireDatabase } from 'angularfire2/database';
 
 
-@IonicPage()
 @Component({
   selector: 'page-connexion',
   templateUrl: 'connexion.html',

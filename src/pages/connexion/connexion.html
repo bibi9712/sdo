@@ -30,11 +30,28 @@
     </form>
 
     <form (submit)="doSignUp()" *ngSwitchCase="'signup'">
-      <ion-label>{{ 'Username' }}</ion-label>
+      <ion-item >
+          <ion-label>{{ 'Username' }}</ion-label>
           <ion-input type="text" [(ngModel)]="user.pseudo" name="pseudo"></ion-input>
+      </ion-item>
+      
+<ion-item >
+    <ion-label float>{{ 'Password' }}</ion-label>
+    <ion-input type="password" [(ngModel)]="user.password" name="password"></ion-input>
+</ion-item>
+         
+          <ion-item >
+          <ion-label float>{{ 'Birth' }}
+              <ion-icon name="calendar"></ion-icon>
+          </ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="user.birth" name="birth"></ion-datetime>
+        </ion-item>
 
-          <ion-label float>{{ 'Password' }}</ion-label>
-          <ion-input type="password" [(ngModel)]="user.password" name="password"></ion-input>
+        <ion-item >
+            <ion-label float>{{ 'Email' }}</ion-label>
+              <ion-input type="text" [(ngModel)]="user.email" name="eamil"></ion-input>
+        </ion-item>
+       
 
         <div padding text-center>
           <button ion-button round color="light" icon-right>
