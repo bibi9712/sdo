@@ -19,10 +19,12 @@ import {DrinkPage} from '../pages/drinks/drink/drink';
 import {FavorisPage} from '../pages/favoris/favoris';
 import {GroupsPage} from '../pages/groups/groups';
 import {GroupPage} from '../pages/groups/group/group';
+import { SoftsPage } from '../pages/softs/softs';
 //import {} from '../pages/';
 
 /************ SERVICES ***************/
 import {ConnexionService} from '../pages/connexion/connexion.service';
+
 
 /************ BDD ***************/
 var config = {
@@ -45,7 +47,8 @@ var config = {
     DrinkPage,
     FavorisPage,
     GroupsPage,
-    GroupPage
+    GroupPage,
+    SoftsPage
   ],
   imports: [
     BrowserModule,
@@ -66,7 +69,8 @@ var config = {
     DrinkPage,
     FavorisPage,
     GroupsPage,
-    GroupPage
+    GroupPage,
+    SoftsPage
   ],
   providers: [
     StatusBar,

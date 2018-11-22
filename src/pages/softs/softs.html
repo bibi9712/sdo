@@ -1,0 +1,70 @@
+
+<ion-header>
+        <ion-navbar>
+        </ion-navbar>
+</ion-header>
+
+<ion-content>
+          <ion-segment color="danger" [(ngModel)]="drinkSwitch">
+            <ion-segment-button value="soda">
+              Soda
+            </ion-segment-button>
+            <ion-segment-button value="bchaud">
+              Boissons chaudes
+            </ion-segment-button>
+            <ion-segment-button value="cocktails">
+              Cocktails
+            </ion-segment-button>
+          </ion-segment>
+
+        <div [ngSwitch]="drinkSwitch">
+          <ion-list *ngSwitchCase="'soda'">
+            <ion-item >
+                <button (click)="consulter('pupu')">
+                    <ion-thumbnail item-start>
+                        <img src="assets/img/thumbnail-puppy-1.jpg">
+                    </ion-thumbnail>
+                </button>
+              <h2>Ruby</h2>
+              <button>Add</button>
+            </ion-item>
+          </ion-list>
+      
+          <ion-list *ngSwitchCase="'cocktails'">
+            <ion-item>
+              <ion-thumbnail item-start>
+                <img src="assets/img/thumbnail-kitten-1.jpg">
+              </ion-thumbnail>
+              <h2>Luna</h2>
+            </ion-item>
+            
+          </ion-list>
+      
+          <ion-list *ngSwitchCase="'bchaud'">
+            <ion-item>
+              <ion-thumbnail item-start>
+                <img src="assets/img/thumbnail-duckling-1.jpg">
+              </ion-thumbnail>
+              <h2>Daffy</h2>
+            </ion-item>
+            <ion-item>
+              <ion-thumbnail item-start>
+                <img src="assets/img/thumbnail-duckling-2.jpg">
+              </ion-thumbnail>
+              <h2>Huey</h2>
+            </ion-item>
+            <ion-item>
+              <ion-thumbnail item-start>
+                <img src="assets/img/thumbnail-duckling-3.jpg">
+              </ion-thumbnail>
+              <h2>Dewey</h2>
+            </ion-item>
+            <ion-item>
+              <ion-thumbnail item-start>
+                <img src="assets/img/thumbnail-duckling-4.jpg">
+              </ion-thumbnail>
+              <h2>Louie</h2>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-content>

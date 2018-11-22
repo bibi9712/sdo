@@ -68,15 +68,14 @@ page-drinks {
     margin-right: -65px;
     z-index: 10;
   }
-  
   .person-type {
-    transform: scale(0);
-    opacity: 0;
-  }
-  
-  .person-type.active {
     transform: scale(1);
     opacity: 1;
+  }
+
+  .some-space{
+    width: 50%;
+    float: left;
   }
   
   .option-wrapper {
