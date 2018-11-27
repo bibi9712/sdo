@@ -1,12 +1,14 @@
-<ion-header>
+<ion-card>
+    <img src="{{drink.image}}"/>
 
-  <ion-navbar>
-    <ion-title>drink</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
-</ion-content>
+    <ion-badge color="{{dirnk.status}}"></ion-badge>
+    <ion-card-content>
+      <ion-card-title>
+        {{drink.name}}
+        </ion-card-title>
+      <p>
+     {{drink.description}}
+      </p>
+      <p>{{drink.price}}</p>
+    </ion-card-content>
+  </ion-card>

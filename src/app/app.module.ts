@@ -6,8 +6,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 import{AngularFireDatabaseModule} from'angularfire2/database';
 import{AngularFireModule} from 'angularfire2';
-
+import { AngularFireAuth } from 'angularfire2/auth';
 import { MyApp } from './app.component';
+import * as firebase from 'firebase/app';
 
 /************ PAGES ***************/
 import {ConnexionPage} from '../pages/connexion/connexion';
@@ -48,7 +49,7 @@ var config = {
     FavorisPage,
     GroupsPage,
     GroupPage,
-    SoftsPage
+    SoftsPage,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +77,7 @@ var config = {
     StatusBar,
     SplashScreen,
     ConnexionService,
+    AngularFireAuth,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

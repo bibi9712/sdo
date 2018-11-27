@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import {  NavController, NavParams, ToastController } from 'ionic-angular';
+import {  NavController } from 'ionic-angular';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ConnexionService } from './connexion.service';
 import { TabsPage } from '../tabs/tabs';
-import { EntiteUser } from '../profil/EntiteUser';
-import { Storage } from '@ionic/storage';
-import { ConnexionService } from './connexion.service'
-import { AngularFireDatabase } from 'angularfire2/database';
 
 
 @Component({
@@ -13,104 +11,45 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 export class ConnexionPage {
 
-  user: EntiteUser;
+  loginForm: FormGroup;
+	loginError: string;
 
-
-  private opt: string = 'signin';
-
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    public storage: Storage, public connexionService: ConnexionService,
-    public toastctrl: ToastController,
-    public fireBase: AngularFireDatabase) {
-    this.initializeUser();
-    this.getStorage();
+	constructor(
+		private navCtrl: NavController,
+		private auth: ConnexionService,
+		fb: FormBuilder
+	) {
+		this.loginForm = fb.group({
+			email: ['', Validators.compose([Validators.required, Validators.email])],
+			password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
+		});
   }
-
-  initializeUser() {
-    this.user = new EntiteUser;
-    this.user.pseudo = 'maxzou';
-    this.user.password = 'pilou';
+  
+  login() {
+		let data = this.loginForm.value;
+		if (!data.email) {
+			return;
+		}
+		let credentials = {
+			email: data.email,
+			password: data.password
+		};
+		this.auth.signInWithEmail(credentials)
+			.then(
+				() => this.navCtrl.setRoot(TabsPage),
+				error => this.loginError = error.message
+			);
   }
-  getStorage() {
-    this.storage.get('user').then(us => this.user == us);
-    if (this.user.pseudo == '' && this.user.password == '') {
-      this.opt = 'signup';
-    }
-  }
+  
 
-  ionViewDidLoad() {
-    if (this.user.pseudo == '' && this.user.password == '') {
-      this.opt = 'signup';
-    }
-  }
+  loginWithGoogle() {
+		 this.auth.signInWithGoogle().then(
+			 user => this.getTabPage(user));	
+	}
 
-  doLogin() {
-    let liste =  this.connexionService.getUses();
-    liste.subscribe(
-      data =>   {
-          let userfind = data.find(ose=> ose.password == this.user.password &&  ose.pseudo ==this.user.pseudo)
-          if (userfind != null) {
-            this.storage.set('user', userfind);
-            this.navCtrl.push(TabsPage);
-          }
-          else {
-            this.getErrorDoLogin();
-          }
-      }
-     );
-  }
+	getTabPage(user: firebase.auth.UserCredential){
+		localStorage.setItem("data",JSON.stringify(user))
+		this.navCtrl.setRoot(TabsPage)
+	}
 
-  doSignUp() {
-
-    if (this.user.pseudo == '' || this.user.password == '') {
-      this.getErrorDoLogin();
-    } else {
-      let liste =  this.connexionService.getUses();
-      liste.subscribe(
-        data =>   {
-             let userFind = data.find(ose=> ose.password == this.user.password && ose.pseudo ==this.user.pseudo) 
-             if (userFind != null) {
-              this.getErrorSignUp();
-            }
-            else {
-              this.connexionService.addUser(this.user);
-              this.storage.set('user', this.user);
-              this.navCtrl.push(TabsPage);
-              this.getuserCreated();
-            }
-        }
-       );
-    }
-  }
-
-  getErrorDoLogin() {
-    let toast = this.toastctrl.create({
-      message: 'Login or Password is wrong',
-      duration: 3000,
-      position: 'top'
-    }
-
-    );
-    toast.present();
-  }
-
-  getErrorSignUp() {
-    let toast = this.toastctrl.create({
-      message: 'Login or Password already existing',
-      duration: 3000,
-      position: 'top'
-    }
-    );
-    toast.present();
-  }
-
-  getuserCreated() {
-    let toast = this.toastctrl.create({
-      message: 'User is created',
-      duration: 3000,
-      position: 'top'
-    }
-    );
-    toast.present();
-  }
 }

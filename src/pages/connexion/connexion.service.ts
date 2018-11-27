@@ -1,23 +1,46 @@
 import { Injectable } from '@angular/core';
-import { EntiteUser } from '../profil/EntiteUser';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
+import AuthProvider = firebase.auth.AuthProvider;
 
 @Injectable()
 export class ConnexionService {
-    userFind: EntiteUser;
+   private user: firebase.User;
 
-    constructor(public dataBase: AngularFireDatabase) { }
+	constructor(public afAuth: AngularFireAuth) {
+		afAuth.authState.subscribe(user => {
+			this.user = user;
+		});
+	}
 
-    getUses() : Observable<EntiteUser[]>{
-       return this.dataBase.list<EntiteUser>('/users/').valueChanges();
+	signInWithEmail(credentials) {
+		console.log('Sign in with email');
+		return this.afAuth.auth.signInWithEmailAndPassword(credentials.email,
+			 credentials.password);
+   }
+   
+   signInWithGoogle():any{
+		return  this.oauthSignIn(new firebase.auth.GoogleAuthProvider());
     }
 
-    addUser(user: EntiteUser) {
-       let id = this.dataBase.createPushId();
-       user.id = id;
-       this.dataBase.list('/users').push(user);
-    }
-
-
+private oauthSignIn(provider: AuthProvider) {
+	if (!(<any>window).cordova) {
+		return this.afAuth.auth.signInWithPopup(provider);
+	} else {
+		return this.afAuth.auth.signInWithRedirect(provider)
+		.then(() => {
+			return this.afAuth.auth.getRedirectResult().then( result => {
+				// This gives you a Google Access Token.
+				// You can use it to access the Google API.
+				let token = result.credential.providerId;
+				// The signed-in user info.
+				let user = result.user;
+				console.log(token, user);
+			}).catch(function(error) {
+				// Handle Errors here.
+				alert(error.message);
+			});
+		});
+	}
+}
 }

@@ -1,64 +1,58 @@
 
-<ion-content padding>
-  <div id="logo" padding text-center>
-    <img src="../../assets/imgs/mojito.jpeg">
-  </div>
+<ion-header>
+	<ion-navbar>
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>Log in</ion-title>
+	</ion-navbar>
+</ion-header>
 
-  <div padding>
-    <ion-segment [(ngModel)]="opt">
-      <ion-segment-button value="signin">
-        Sign In
-      </ion-segment-button>
-      <ion-segment-button value="signup">
-        Sign Up
-      </ion-segment-button>
-    </ion-segment>
-  </div>
+<ion-content>
+	<form (ngSubmit)="login()" [formGroup]="loginForm">
+		<ion-list inset>
 
-  <div [ngSwitch]="opt">
-    <form (submit)="doLogin()" *ngSwitchCase="'signin'">
+			<ion-item >
+				<ion-input type="text" placeholder="Email" formControlName="email"></ion-input>
+			</ion-item>
 
-          <ion-input type="text" [(ngModel)]="user.pseudo" name="pseudo"></ion-input>
+			<div >
+				<div >It should be a valid email</div>
+			</div>
 
-          <ion-input type="password" [(ngModel)]="user.password" name="password"></ion-input>
+			<ion-item >
+				<ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+			</ion-item>
 
-        <div padding text-center>
-          <button ion-button round color="light" icon-right >
-            {{ 'Connexion'}} <ion-icon name="log-in"></ion-icon>
-          </button>
-        </div>
-    </form>
+			<div >
+				<div >It should be at least 5 characters</div>
+			</div>
+		</ion-list>
 
-    <form (submit)="doSignUp()" *ngSwitchCase="'signup'">
-      <ion-item >
-          <ion-label>{{ 'Username' }}</ion-label>
-          <ion-input type="text" [(ngModel)]="user.pseudo" name="pseudo"></ion-input>
-      </ion-item>
-      
-<ion-item >
-    <ion-label float>{{ 'Password' }}</ion-label>
-    <ion-input type="password" [(ngModel)]="user.password" name="password"></ion-input>
-</ion-item>
-         
-          <ion-item >
-          <ion-label float>{{ 'Birth' }}
-              <ion-icon name="calendar"></ion-icon>
-          </ion-label>
-          <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="user.birth" name="birth"></ion-datetime>
-        </ion-item>
+		<div padding-horizontal>
+			<div class="form-error">{{loginError}}</div>
 
-        <ion-item >
-            <ion-label float>{{ 'Email' }}</ion-label>
-              <ion-input type="text" [(ngModel)]="user.email" name="eamil"></ion-input>
-        </ion-item>
-       
+			<button ion-button full type="submit" [disabled]="!loginForm.valid">Log in</button>
+			<div class="login-footer">
+				<p>
+					<a href="#">Forgot password?</a>
+					If you're a new user, please sign up.
+				</p>
+			</div>
 
-        <div padding text-center>
-          <button ion-button round color="light" icon-right>
-            {{ 'Create' }} <ion-icon name="person-add"></ion-icon>
-          </button>
-        </div>
-    </form>
+			<ion-list>
 
-  </div>
+				<button ion-button icon-left block clear (click)="loginWithGoogle()">
+					<ion-icon name="logo-google"></ion-icon>
+					Log in with Google
+				</button>
+
+				<button ion-button icon-left block clear (click)="signup()">
+					<ion-icon name="person-add"></ion-icon>
+					Sign up
+				</button>
+			</ion-list>
+		</div>
+	</form>
 </ion-content>
+view rawlogin.html hosted with ❤ by GitHub
