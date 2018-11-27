@@ -8,7 +8,6 @@ import{AngularFireDatabaseModule} from'angularfire2/database';
 import{AngularFireModule} from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { MyApp } from './app.component';
-import * as firebase from 'firebase/app';
 
 /************ PAGES ***************/
 import {ConnexionPage} from '../pages/connexion/connexion';
@@ -25,6 +24,7 @@ import { SoftsPage } from '../pages/softs/softs';
 
 /************ SERVICES ***************/
 import {ConnexionService} from '../pages/connexion/connexion.service';
+import {SoftsService} from '../pages/softs/softs.service';
 
 
 /************ BDD ***************/
@@ -78,6 +78,7 @@ var config = {
     SplashScreen,
     ConnexionService,
     AngularFireAuth,
+    SoftsService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

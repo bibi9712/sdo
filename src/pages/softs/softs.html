@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-          <ion-segment color="danger" [(ngModel)]="drinkSwitch">
+          <ion-segment color="danger" [(ngModel)]="drinkSwitch" (ionChange)="segmentChanged()">
             <ion-segment-button value="soda">
               Soda
             </ion-segment-button>
@@ -19,13 +19,14 @@
 
         <div [ngSwitch]="drinkSwitch">
           <ion-list *ngSwitchCase="'soda'">
-            <ion-item >
+            <ion-item *ngFor ="let drink of cocktails">
                 <button (click)="consulter('pupu')">
                     <ion-thumbnail item-start>
-                        <img src="assets/img/thumbnail-puppy-1.jpg">
+                        <img src="{{drink.icon}}">
                     </ion-thumbnail>
                 </button>
-              <h2>Ruby</h2>
+              <h2>{{drink.name}}</h2>
+              <p>{{drink.description}}</p>
               <button>Add</button>
             </ion-item>
           </ion-list>

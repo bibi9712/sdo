@@ -1,8 +1,8 @@
-export class EntiteDrink{
-    public id : string;
-    public nale : string;
-    public image:string;
-    public icon: string;
-    public description:string;
+export interface EntiteDrink{
+     id : string;
+     name : string;
+     image:string;
+     icon: string;
+     description:string;
 
 }
