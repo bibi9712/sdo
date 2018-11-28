@@ -5,10 +5,9 @@ import { EntiteDrink } from '../drinks/drink/entiteDrink';
 
 @Injectable()
 export class SoftsService {
-	constructor(private db: AngularFireDatabase){}
+    constructor(private db: AngularFireDatabase){}
 
-
-    getSoftsDrinks() {
-        return this.db.list<EntiteDrink>('/drinks');
+    getDrinks(){
+        return this.db.list<EntiteDrink>('/drinks').valueChanges();
     }
 }

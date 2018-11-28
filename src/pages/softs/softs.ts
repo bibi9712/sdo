@@ -9,27 +9,53 @@ import { EntiteDrink } from '../drinks/drink/entiteDrink';
     templateUrl: 'softs.html'
   })
   export class SoftsPage {
-    public drinkSwitch :string = "bchaud";
+    public drinkSwitch :string ;
+    public soda: EntiteDrink[];
     public cocktails: EntiteDrink[];
+    public bchaud: EntiteDrink[];
+
+    public drinks: EntiteDrink[];
 
     constructor(public navCtrl: NavController, public soft: SoftsService, public cf:ChangeDetectorRef) {
-
-    this.soft.getSoftsDrinks().valueChanges().subscribe(drinks => {
-      this.cocktails = drinks;
-    });
-
-  
+      this.initialize();
+      this.getDrinksFilter();
     }
 
-    consulter(item:string){
-      console.log("dans la méthode consulter : " + item)
-      this.navCtrl.push(DrinkPage,{ "str":item});
+
+    initialize(){
+    this.drinkSwitch = "soda";
+    this.soda = [];
+    this.cocktails = [];
+    this.bchaud = [];
+    }
+
+    getDrinksFilter(){
+      this.soft.getDrinks().subscribe(res=>{
+        res
+        .filter(res=> res.type == "soft")
+            .map(res => {
+              if(res.sub_type == "cocktails"){
+                this.cocktails.push(res);
+              }
+              else if(res.sub_type == "soda"){
+                this.soda.push(res);
+              }
+              else if(res.sub_type == "bchaud"){
+                this.bchaud.push(res);
+              }
+            })
+    })
+    }
+
+
+    consulter(drink:EntiteDrink){
+      console.log("dans la méthode consulter : " + drink)
+      this.navCtrl.push(DrinkPage,{ "drink":drink});
     }
 
     segmentChanged()
     {
       this.cf.detectChanges();
     }
-  
   }
   
