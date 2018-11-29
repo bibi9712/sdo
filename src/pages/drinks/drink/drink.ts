@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { EntiteDrink } from './entiteDrink';
 import firebase from 'firebase';
+import {SoftsService} from '../../softs/softs.service'
 
 
 
@@ -19,14 +20,19 @@ export class DrinkPage {
   color :string;
   s:string ="S";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public soft: SoftsService) {
     this.drink = this.navParams.get("drink"); 
 
-    if(this.drink.type == "soft"){
-      this.color = "secondary";
-    }else{
-      this.color = "danger";
-    }
+    let cat = this.soft.getCategorie(this.drink.categorie);
+    cat.subscribe(cats=> cats.forEach(cat =>{
+      if( cat.name== "soft"){
+        this.color = "secondary";
+      }else{
+        this.color = "danger";
+      }
+    })).unsubscribe;
+
+   
  
 this.storage.ref('img.jpg').getDownloadURL().then(res => {
   this.drink.image = res; 
