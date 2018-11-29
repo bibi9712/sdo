@@ -14,5 +14,30 @@
 
 
 <ion-content padding>
+      <ion-list inset>
+          <button (click) ="uploadFile()">
+          <ion-item>
+              <ion-avatar item-start>
+                <img src="{user.urlPhoto}">
+              </ion-avatar>
+            </ion-item>
+          </button>
+        <ion-item >
+          <ion-input type="text" placeholder="lastName" [(ngModel)] = "user.nom" name="lastName"></ion-input>
+        </ion-item>
 
+        <ion-item >
+            <ion-input type="text" placeholder="firstName"  [(ngModel)] = "user.prenom" name="firstName"></ion-input>
+          </ion-item>
+
+          <ion-item >
+              <ion-input type="password" placeholder="Password"  [(ngModel)] = "user.password" name="Password"></ion-input>
+            </ion-item>
+
+              
+        <ion-item >
+            <ion-input type="email" placeholder="email" [(ngModel)] = "user.email" name="email"></ion-input>
+          </ion-item>
+    
+      </ion-list>
 </ion-content>

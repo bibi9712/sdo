@@ -20,6 +20,7 @@ import {FavorisPage} from '../pages/favoris/favoris';
 import {GroupsPage} from '../pages/groups/groups';
 import {GroupPage} from '../pages/groups/group/group';
 import { SoftsPage } from '../pages/softs/softs';
+import {ProfilPage} from '../pages/profil/profil';
 //import {} from '../pages/';
 
 /************ SERVICES ***************/
@@ -27,7 +28,7 @@ import {ConnexionService} from '../pages/connexion/connexion.service';
 import {SoftsService} from '../pages/softs/softs.service';
 
 
-/************ BDD ***************/
+/************ BDD firebase***************/
 var config = {
   apiKey: "AIzaSyCL_H94pwAziUn0ecS4mzXqXLDHIHi9j5k",
   authDomain: "sdo0-4b11a.firebaseapp.com",
@@ -50,6 +51,7 @@ var config = {
     GroupsPage,
     GroupPage,
     SoftsPage,
+    ProfilPage
   ],
   imports: [
     BrowserModule,
@@ -71,7 +73,8 @@ var config = {
     FavorisPage,
     GroupsPage,
     GroupPage,
-    SoftsPage
+    SoftsPage,
+    ProfilPage
   ],
   providers: [
     StatusBar,
