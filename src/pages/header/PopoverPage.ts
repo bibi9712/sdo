@@ -3,6 +3,7 @@ import { ViewController, NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import {ConnexionPage} from '../connexion/connexion';
 import { ProfilPage } from '../profil/profil';
+import { PanierPage } from '../panier/panier';
 
 
 @Component({
@@ -10,6 +11,7 @@ import { ProfilPage } from '../profil/profil';
   templateUrl: 'pop.html',
 })
 export class PopoverPage {
+
     constructor(public viewCtrl: ViewController, public navCtrl: NavController,
       public storage : Storage){}
 
@@ -23,6 +25,10 @@ export class PopoverPage {
 
     doProfil(){
       this.navCtrl.push(ProfilPage);
+    }
+
+    goPanier(){
+      this.navCtrl.push(PanierPage);
     }
     
 }

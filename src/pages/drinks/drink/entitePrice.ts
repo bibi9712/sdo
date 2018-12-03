@@ -1,4 +1,4 @@
-export interface EntitePrice{
+export class EntitePrice{
      id : number;
      montant:number;
 }

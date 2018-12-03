@@ -1,4 +1,4 @@
-export interface EntiteDrink{
+export class EntiteDrink{
      name : string;
      image:string;
      icon: string;

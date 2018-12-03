@@ -3,8 +3,10 @@ import {NavController } from 'ionic-angular';
 import {DrinkPage} from '../drinks/drink/drink'
 import {SoftsService} from './softs.service'
 import { EntiteDrink } from '../drinks/drink/entiteDrink';
-import { Observable } from 'rxjs';
-import { EntiteSubCategorie } from '../drinks/drink/entiteSubCategorie';
+import { EntiteDrinkDto } from '../drinks/drink/entiteDrinkDto';
+import { categorieEnum, SubCategorieEnum } from '../../assets/utils/utilsCategorie';
+import {PanierService} from '../panier/panierService';
+
 
 @Component({
     selector: 'page-softs',
@@ -12,15 +14,19 @@ import { EntiteSubCategorie } from '../drinks/drink/entiteSubCategorie';
   })
   export class SoftsPage {
     public drinkSwitch :string ;
-    public soda: EntiteDrink[];
-    public cocktails: EntiteDrink[];
-    public bchaud: EntiteDrink[];
+    public soda: EntiteDrinkDto[];
+    public cocktails: EntiteDrinkDto[];
+    public bchaud: EntiteDrinkDto[];
 
-    constructor(public navCtrl: NavController, public soft: SoftsService, public cf:ChangeDetectorRef) {
+    constructor(public navCtrl: NavController, public soft: SoftsService, public cf:ChangeDetectorRef, public panierService :PanierService) {
       this.initialize();
       this.getDrinksFilter();
     }
 
+    segmentChanged()
+    {
+      this.cf.detectChanges();
+    }
 
     initialize(){
     this.drinkSwitch = "soda";
@@ -29,52 +35,75 @@ import { EntiteSubCategorie } from '../drinks/drink/entiteSubCategorie';
     this.bchaud = [];
     }
 
-    getDrinksFilter(){
-      this.soft.getDrinks().subscribe(dr=>{
-        dr.forEach(tr => {
-          let categorie = this.soft.getCategorie(tr.categorie);
-          let subCategorie = this.soft.getSubcategorie(tr.subCategorie);
-
-          categorie.subscribe(cats => cats.forEach(cat => {
-            if(cat.name == "soft"){
-              this.dispatchSubCat(subCategorie,tr);
-            }
-          }))
-        })
-        
-    }).unsubscribe;
-    }
-
-
-    consulter(drink:EntiteDrink){
+    consulter(drink:EntiteDrinkDto){
       console.log("dans la méthode consulter : " + drink)
       this.navCtrl.push(DrinkPage,{ "drink":drink});
     }
 
-    segmentChanged()
-    {
-      this.cf.detectChanges();
+
+    getDrinksFilter(){
+      this.soft.getDrinks().subscribe(drinks=> drinks.forEach(drink=>{
+        let cats = this.soft.getCategorie(drink.categorie);
+        let subs = this.soft.getSubcategorie(drink.subCategorie);
+        let prices = this.soft.getPrice(drink.categorie);
+        let dto = this.DrinkToDto(drink,cats,subs,prices)
+        this.dispatchSoft(drink,dto);
+      }));
     }
 
-    dispatchSubCat(subCategorie : Observable<EntiteSubCategorie[]>, tr : EntiteDrink){
+ 
 
-      subCategorie.subscribe(zoe => zoe.forEach(res => {
-
-        switch (res.name) {
-          case "soda":
-          this.soda.push(tr);
+    dispatchSoft( drink : EntiteDrink, dto){
+      if(drink.categorie == categorieEnum.SOFT){
+        switch (drink.subCategorie) {
+          case SubCategorieEnum.SODA:
+          this.soda.push(dto);
             break;
-            case "cocktail":
-            this.cocktails.push(tr);
+            case SubCategorieEnum.COCKTAIL:
+            this.cocktails.push(dto);
               break;
-              case "boisson chaude":
-              this.bchaud.push(tr);
+              case SubCategorieEnum.BCHAUD:
+              this.bchaud.push(dto);
                 break;
           default:
             break;
         }
-
-      }))
+      }
     }
+
+DrinkToDto(value,cats,subs,prices): EntiteDrinkDto{
+      let entiteDrinkDto = new EntiteDrinkDto;
+      
+prices.subscribe(prices=>  prices.forEach(price=>{
+  entiteDrinkDto.montant = price.montant;
+}));
+
+ 
+cats.subscribe(cats=>cats.forEach(cat=>{
+  entiteDrinkDto.categorie = cat.name;
+}));
+  
+subs.subscribe(subs=> subs.forEach(sub=>{
+  entiteDrinkDto.subCategorie = sub.name;
+}));
+     
+      entiteDrinkDto.name = value.name;
+      entiteDrinkDto.description = value.description;
+      entiteDrinkDto.icon = value.icon;
+      entiteDrinkDto.image = value.image;
+      entiteDrinkDto.quantite = 0;
+      return entiteDrinkDto;
+    }
+
+ removeArticle(drink : EntiteDrinkDto){
+  this.panierService.removeArticle(drink);
+
+ }
+
+ addArticle(drink : EntiteDrinkDto){
+  this.panierService.addArticle(drink);
+}
+
+   
   }
   

@@ -1,8 +1,4 @@
-
-<ion-header>
-        <ion-navbar>
-        </ion-navbar>
-</ion-header>
+<header></header>
 
 <ion-content>
           <ion-segment color="danger" [(ngModel)]="drinkSwitch" (ionChange)="segmentChanged()">
@@ -26,7 +22,14 @@
                     </ion-thumbnail>
                 </button>
               <h2>{{drink.name}}</h2>
-              <button>Add</button>
+              <h2>{{drink.montant}}</h2>
+              <button (click)="removeArticle(drink)">
+              <ion-icon name="remove-circle" ></ion-icon>
+            </button>
+                <label>{{drink.quantite}}</label>
+                <button (click)="addArticle(drink)">
+                    <ion-icon name="add-circle" ></ion-icon>
+                  </button>
             </ion-item>
           </ion-list>
       

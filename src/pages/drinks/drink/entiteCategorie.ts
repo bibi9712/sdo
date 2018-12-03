@@ -1,4 +1,4 @@
-export interface EntiteCategorie{
+export class EntiteCategorie{
      id : number;
      name:string;
 }

@@ -1,0 +1,16 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>panier</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-item *ngFor ="let drink of drinks">
+      <h2>{{drink.name}}</h2>
+      <h2>{{drink.montant}}</h2>
+      <label>{{drink.quantite}}</label>
+    </ion-item>
+
+</ion-content>

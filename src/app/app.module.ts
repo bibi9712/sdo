@@ -21,11 +21,13 @@ import {GroupsPage} from '../pages/groups/groups';
 import {GroupPage} from '../pages/groups/group/group';
 import { SoftsPage } from '../pages/softs/softs';
 import {ProfilPage} from '../pages/profil/profil';
+import {PanierPage} from '../pages/panier/panier';
 //import {} from '../pages/';
 
 /************ SERVICES ***************/
 import {ConnexionService} from '../pages/connexion/connexion.service';
 import {SoftsService} from '../pages/softs/softs.service';
+import {PanierService} from '../pages/panier/panierService';
 
 
 /************ BDD firebase***************/
@@ -51,7 +53,8 @@ var config = {
     GroupsPage,
     GroupPage,
     SoftsPage,
-    ProfilPage
+    ProfilPage,
+    PanierPage
   ],
   imports: [
     BrowserModule,
@@ -74,7 +77,8 @@ var config = {
     GroupsPage,
     GroupPage,
     SoftsPage,
-    ProfilPage
+    ProfilPage,
+    PanierPage
   ],
   providers: [
     StatusBar,
@@ -82,6 +86,7 @@ var config = {
     ConnexionService,
     AngularFireAuth,
     SoftsService,
+    PanierService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
