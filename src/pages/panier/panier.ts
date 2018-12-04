@@ -13,4 +13,8 @@ export class PanierPage {
   constructor(public navCtrl: NavController, public navParams: NavParams ,public panierService:PanierService) {
     this.drinks = this.panierService.getDrinks();
   }
+
+  saveOrder(){
+    this.panierService.saveOrder();
+  }
 }

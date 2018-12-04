@@ -1,13 +1,23 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
 import { EntiteDrinkDto } from '../drinks/drink/entiteDrinkDto';
+import firebase from 'firebase';
+import { createProviderInstance } from '@angular/core/src/view/provider';
+import { Order } from './order';
 
 
 @Injectable()
 export class PanierService {
 
     public drinks :EntiteDrinkDto[] = [];
-    constructor(){}
+    user:firebase.auth.UserCredential;
+    montantOrder : number;
+
+    ref = firebase.database().ref('orders/');
+
+
+    constructor(){
+        this.montantOrder = 0;
+    }
 
     addArticle(drink: EntiteDrinkDto) {
         if(this.drinks.length == 0){
@@ -42,5 +52,29 @@ export class PanierService {
       getDrinks(){
           return this.drinks;
       }
+
+      getMontantOrder() : number{
+          this.drinks.forEach(dr=>{
+                this.montantOrder += dr.montant;
+          })
+
+          return this.montantOrder;
+      }
+
+      saveOrder(){
+         let order = this.createOrder();
+         this.ref.push(order);
+      }
+
+      createOrder(){
+        let  order = new Order();
+        this.user = JSON.parse(localStorage.getItem("data"));
+        console.log(this.user);
+        order.user = this.user.user.uid;
+        order.drinks = this.drinks;
+        order.montant = this.getMontantOrder();
+        return order;
+      }
+
 
 }
