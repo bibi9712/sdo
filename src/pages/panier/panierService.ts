@@ -6,6 +6,9 @@ import { Order } from './order';
 
 @Injectable()
 export class PanierService {
+  getOrders(uid: string): any {
+    throw new Error("Method not implemented.");
+  }
 
     public drinks :EntiteDrinkDto[] = [];
     user:firebase.auth.UserCredential;
