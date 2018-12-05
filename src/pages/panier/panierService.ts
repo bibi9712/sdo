@@ -2,13 +2,11 @@ import { Injectable } from '@angular/core';
 import { EntiteDrinkDto } from '../drinks/drink/entiteDrinkDto';
 import firebase from 'firebase';
 import { Order } from './order';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 
 @Injectable()
 export class PanierService {
-  getOrders(uid: string): any {
-    throw new Error("Method not implemented.");
-  }
 
     public drinks :EntiteDrinkDto[] = [];
     user:firebase.auth.UserCredential;
@@ -17,7 +15,8 @@ export class PanierService {
     ref = firebase.database().ref('orders/');
 
 
-    constructor(){
+
+    constructor(private db: AngularFireDatabase){
         this.montantOrder = 0;
     }
 
@@ -78,5 +77,10 @@ export class PanierService {
         return order;
       }
 
+      
+
+  getOrders(uid: string) {
+    return this.db.list<Order>('/orders', res => res.orderByChild("user").equalTo(uid)).valueChanges();
+}
 
 }
