@@ -22,6 +22,7 @@ import {GroupPage} from '../pages/groups/group/group';
 import { SoftsPage } from '../pages/softs/softs';
 import {ProfilPage} from '../pages/profil/profil';
 import {PanierPage} from '../pages/panier/panier';
+import {CreateGroupPage} from '../pages/groups/create-group/create-group';
 //import {} from '../pages/';
 
 /************ SERVICES ***************/
@@ -54,7 +55,8 @@ var config = {
     GroupPage,
     SoftsPage,
     ProfilPage,
-    PanierPage
+    PanierPage,
+    CreateGroupPage
   ],
   imports: [
     BrowserModule,
@@ -78,7 +80,8 @@ var config = {
     GroupPage,
     SoftsPage,
     ProfilPage,
-    PanierPage
+    PanierPage,
+    CreateGroupPage
   ],
   providers: [
     StatusBar,

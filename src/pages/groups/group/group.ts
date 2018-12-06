@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { entiteGroup } from './entiteGroup';
 
 @Component({
   selector: 'page-group',
   templateUrl: 'group.html',
 })
 export class GroupPage {
-  item : string ="";
+  group : entiteGroup;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.item = this.navParams.get("str"); 
-    console.log("into scontact : " + this.item)
+    this.group = this.navParams.get("str"); 
+    console.log("into scontact : " + this.group)
   }
 
   ionViewDidLoad() {
