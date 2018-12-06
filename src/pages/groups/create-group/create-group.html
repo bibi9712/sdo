@@ -16,17 +16,18 @@
 <ion-content padding>
     <form>
         <ion-item >
-            <ion-input type="text" placeholder="nom"></ion-input>
+            <ion-input type="text" placeholder="nom" [(ngModel)] ="nom" name="nom"></ion-input>
           </ion-item>
 
           <ion-item >
-              <ion-input type="password" placeholder="code" ></ion-input>
+              <ion-input type="password" placeholder="code" [(ngModel)] ="code" name="code"></ion-input>
             </ion-item>
 
             <ion-item >
-                <ion-input type="password" placeholder="codeConf"></ion-input>
+                <ion-input type="password" placeholder="codeConf" [(ngModel)] ="codeConf" name="codeConf"></ion-input>
               </ion-item>
         
+<button (click)=" createGroup()">Create Groupe</button>
 <button (click)=" dismiss()">Out</button>
 
 </form>
