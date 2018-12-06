@@ -11,9 +11,7 @@ export class FavorisPage {
   user:firebase.auth.UserCredential;
   orders: Order[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public panierService :PanierService) {
-  this.getOrders();
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams, public panierService :PanierService) {}
 
   getOrders(){
 
@@ -23,5 +21,13 @@ export class FavorisPage {
       this.orders = orders;
       console.log(orders);
     } );
+  }
+  
+  ionViewDidLoad(){
+    this.getOrders();
+  }
+
+  ionViewWillEnter(){
+    this.getOrders();
   }
 }

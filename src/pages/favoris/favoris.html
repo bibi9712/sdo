@@ -1,5 +1,7 @@
 <header></header>
 
 <ion-content>
-  
+    <ion-item *ngFor ="let order of orders">
+        <h2>{{order.montant}}</h2>
+      </ion-item>
 </ion-content>
