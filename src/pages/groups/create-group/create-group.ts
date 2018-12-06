@@ -14,6 +14,11 @@ export class CreateGroupPage {
     console.log('ionViewDidLoad CreateGroupPage');
   }
 
+  createGroup(){
+    
+
+  }
+
   dismiss() {
     this.viewCtrl.dismiss();
   }

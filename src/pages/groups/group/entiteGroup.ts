@@ -13,4 +13,5 @@ export class entiteGroup{
     public code : string;
     public orders : Order[];
     public img : string;
+    public dateCreation : Date;
 }
