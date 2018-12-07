@@ -29,6 +29,7 @@ import {CreateGroupPage} from '../pages/groups/create-group/create-group';
 import {ConnexionService} from '../pages/connexion/connexion.service';
 import {SoftsService} from '../pages/softs/softs.service';
 import {PanierService} from '../pages/panier/panierService';
+import {GroupService} from '../pages/groups/groupService';
 
 
 /************ BDD firebase***************/
@@ -90,6 +91,7 @@ var config = {
     AngularFireAuth,
     SoftsService,
     PanierService,
+    GroupService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
